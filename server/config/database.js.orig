@@ -1,0 +1,9 @@
+module.exports = {
+<<<<<<< HEAD
+  // url: "mongodb://mahpah:mahpah@ds055689.mongolab.com:55689/dev-gpshandlew"
+	url: "mongodb://127.0.0.1:27017/umaps"
+};
+=======
+  url: "mongodb://127.0.0.1:27017/umapsv1"
+};
+>>>>>>> apiv1

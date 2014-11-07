@@ -1,0 +1,12 @@
+<div id="time-machine" ng-controller="TimeMachineCtrl" ng-show="model.start">
+  <!-- should have own directive -->
+  <div class="progress-bar"></div>
+  <div class="control-button">
+    <div class="btn btn-play"><i class="fa fa-play"></i></div>
+    <div class="profile-pic">
+      {{model.trackingDevice.description}}
+    </div>
+    From <datetime-picker ng-model="model.fromDate"></datetime-picker>
+    To <datetime-picker ng-model="model.toDate"></datetime-picker>
+  </div>
+</div>

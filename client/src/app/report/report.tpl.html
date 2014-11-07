@@ -1,0 +1,107 @@
+<aside class="report-type-list">
+  <ul class="list-unstyled">
+    <li ng-repeat="type in reportType"
+        ng-class="{'active': currentReport.name == type.name}">
+      <a href="" ng-click="switchTo(type)">
+        <i class="{{type.icon}}"></i>
+        <p>{{type.name}}</p>
+      </a>
+    </li>
+  </ul>
+</aside>
+
+<div id="content-wrapper" class="scrollable">
+  <div class="container-fluid">
+    <div class="row header">
+      <div class="col-md-6">
+        <div class="report-title pull-left">
+          <h4 ng-hide="report.Title">Choose a group or device</h4>
+          <h4 ng-bind="report.Title"></h4>
+        </div>
+        <div class=" pull-right">
+          <button class="btn btn-default"
+              ng-class="{active: showChart}" 
+              ng-click="toggleChart($event)">
+            <span class="fa fa-lg fa-line-chart" tooltip="Toggle Chart"></span>
+          </button>
+          <button class="btn btn-default" ng-click="">
+            <span class="fa fa-lg fa-file-excel-o"
+                  tooltip="Download datasheet"
+            </span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="pull-right">
+        <div class="btn-group" dropdown>
+          <div class="btn btn-default">
+            <span ng-bind="itemType"></span>: <span ng-bind="currentItem.description"></span>
+          </div>
+          <button type="button" class="btn btn-default dropdown-toggle">
+            <span class="caret"></span>
+            <span class="sr-only">Select device or group</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">  
+            <li ng-repeat="group in groups track by $index">
+              
+              <a ng-bind="group.description" ng-click="selectGroup($event, group)"></a>
+
+              <ul class="dropdown-sub-menu" role="menu" ng-show="showDevice">
+                <li ng-repeat="device in group.devices track by $index">
+                  <a ng-bind="device.description" ng-click="selectDevice($event, device)"></a>
+                </li>
+              </ul>
+
+            </li>
+          </ul>
+        </div>
+
+        <div class="btn btn-default">
+          <date-range-picker ng-model="time"></date-range-picker>
+        </div>
+      </div>
+      <style>
+        .axis path, .axis line {
+          fill: none;
+          stroke: #000;
+          shape-rendering: crispEdges;
+        }
+
+        .x.axis path {
+          display: none;
+        }
+
+        .line {
+          fill: none;
+          stroke: steelblue;
+          stroke-width: 1.5px;
+        }
+      </style>
+
+    </div>
+  
+    <div class="row chart-wrapper" ng-show="showChart" ng-switch="chartName">
+      <pie-chart ng-switch-when="stop" data="pieChart.data"></pie-chart> 
+      <line-chart  ng-switch-when="speed" data="lineChart.data" height="200"></line-chart> 
+    </div>
+
+    <div class="row">
+      <div class="loading text-center" ng-show="showLoading">
+        <i class="fa fa-spinner fa-spin"></i>
+      </div>
+      <table class="report-table" ng-hide="showLoading">
+        <thead>
+          <tr>
+            <th ng-repeat="(key, value) in report.Report.ReportHeader" ng-bind="value | unit"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in report.Report.ReportBody">
+            <td ng-repeat="(key, value) in row" ng-bind="value"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

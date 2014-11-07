@@ -1,0 +1,71 @@
+<aside id='map-sidebar' ng-click="console.log('test')" class="device-group-list">
+  <!--control box -->
+  <div class="control-pallete">
+    <ul class="button-group list-inline">
+      <li><input id ="search-btn" type="text" ng-model="search" placeholder="Search"> 
+        <button  id="navbar-right" ng-click="mapSearchHide()" class="margin-left4 btn btn-default btn-sm navbar-btn navbar-right" type="button">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </button>
+        <button id="navbar-repeat" style="margin-left:22px" class="margin-left4 btn btn-default btn-sm navbar-btn navbar-right" type="button">
+           <span class="glyphicon glyphicon-repeat"></span>
+        </button>
+      </li>
+      <li><a href=""></a></li>
+      <li><a href=""></a></li>
+      <li><a href=""></a></li>
+    </ul>
+  </div>
+  <div class="device-list scrollable">
+    <div class="wrapper">
+    <accordion>
+      <accordion-group ng-repeat="group in groups | filter:search">
+        <accordion-heading>
+          <div>
+            <span ng-bind="group.description"></span>
+            <ul class="control-group list-inline pull-right">
+              <li><i class="fa fa-crosshairs"></i></li>
+            </ul>
+          </div>
+        </accordion-heading>
+        <div ng-repeat="device in group.devices" class="device clearfix" ng-class="" ng-click="selectDevice(device)">
+          <span ng-bind="device.description"></span>
+          <ul class="control-group list-inline pull-right">
+            <li><i class="fa fa-clock-o" ng-click="startTimeMachine($event, device)" tooltip="Start Time Machine"></i></li>
+            <li>
+              <i class="fa fa-terminal" ng-click="openTerminal($event, device)"></i>
+              </li>
+            <li><i class="fa fa-crosshairs" ng-class="{active: device.tracking}" ng-click="toggleTrack($event, device)"></i></li>
+          </ul>
+        </div>
+      </accordion-group>
+    </accordion>
+    </div>
+  </div>
+  <div class="footer">
+    <p>&copy; GPSHandle.com</p>
+  </div>
+</aside>
+
+<div class="map">
+
+  <span id="chevron-right" ng-click="mapSearchShow()" class="glyphicon glyphicon-chevron-right map-collapse-icon"></span>
+
+  <div id="map-canvas">
+    <gmap></gmap>
+  </div>
+
+	<infor-panel model="infor"></infor-panel>
+  <div id="time-machine" ng-controller="TimeMachine" ng-show="model.running">
+		<div id="progress-bar" ng-controller="LoadingBarCtrl" style="width: {{width}}%; opacity:{{opacity}}"></div>
+    <div class="btn btn-play" ng-click="play()"><i class="fa fa-play"></i></div>
+    <datetime-picker ng-model="model.fromDate"></datetime-picker>
+    <datetime-picker ng-model="model.toDate"></datetime-picker>
+		<div class="btn" ng-click="show()">Show</div>
+  </div>
+</div>
+
+<style type="text/css">
+	#progress-bar {
+		transition: opacity 0.2s linear, width 0.2s linear;
+	}
+</style>

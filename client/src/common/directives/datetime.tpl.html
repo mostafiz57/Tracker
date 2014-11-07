@@ -1,0 +1,19 @@
+<div class="datetime-picker">
+  <div class="holder date">
+    <button ng-click="showDatePopup()" ng-blur="closeTimePopup()">
+      {{model | date:'fullDate'}}
+    </button>
+    <div class="popup" ng-show="showDate">
+      <datepicker model="model" ng-model="model" ng-change="closeDatePopup()" ng-blur="closeDatePopup()">
+      </datepicker>
+    </div>
+  </div>
+  <div class="holder date">
+    <button ng-click="showTimePopup()" ng-blur="closeTimePopup()">
+      {{model | date:'shortTime'}}
+    </button>
+    <div class="popup" ng-show="showTime" >
+      <timepicker ng-model="model" hour-step="1" minute-step="15" show-meridian="ismeridian"></timepicker>
+    </div>
+  </div>
+</div>

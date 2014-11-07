@@ -1,0 +1,33 @@
+<div class="info-panel" ng-show="model.show">
+  <div class="heading">{{model.title}}</div>
+  <tabset justified="true">
+    <tab>
+      <tab-heading>Summary</tab-heading>
+      <div class="tab-body">
+        <table>
+          <tbody>
+            <tr>
+              <td>Position</td>
+							<td>{{lastPing.lat | number:4}} / {{lastPing.lng | number:4}}</td>
+            </tr>
+            <tr>
+              <td>Adress</td>
+              <td>{{lastPing.address}}</td>
+            </tr>
+            <tr>
+              <td>Speed</td>
+              <td>{{lastPing.speedKPH}} kmph</td>
+            </tr>
+            <tr>
+              <td>Last Event</td>
+              <td>{{lastPing.epoch*1000 | date}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </tab>
+    <tab>
+      <tab-heading>Blah</tab-heading>
+    </tab>
+  </tabset>
+</div>

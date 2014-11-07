@@ -1,0 +1,116 @@
+<div class="container-fluid user">
+	<div class="row head">
+		<input type="text" name="filter" ng-model="search" placeholder="Filter">
+		<a href="" class="btn btn-primary" ng-click="toggleAdd()">Add</a>
+	</div>
+
+	<div class="row">
+		<table ng-show="users.length" style="width: 100%;" class="user-table">
+			<thead>
+				<tr>
+					<td>User</td>
+					<td>Feature</td>
+					<td>Group</td>
+					<td></td>
+				</tr>
+			</thead>
+
+			<tbody>
+				<!-- add a new user -->
+				<tr ng-show="addNew">
+					<td>
+						<div>
+							<p>
+								<input type="text" ng-model="tmpUser.name">
+								<input type="text" ng-model="tmpUser.id">
+							</p>
+							<p>
+								<input type="text" ng-model="tmpUser.email">
+								<input type="text" ng-model="tmpUser.tel">
+							</p>
+						</div>
+					</td>
+					<td>
+						<div>
+							<ul class="list-unstyled list-inline">
+								<li class="feature" 
+									ng-repeat="feature in tmpUser.features">
+									<input type="checkbox" name="" id="" ng-model=feature.granted>{{feature.name}}
+								</li>
+							</ul>
+						</div>
+					</td>
+					<td>
+						<div>
+							<select ng-model="tmpUser.group" ng-options="group.description for group in groupList">
+							</select>
+						</div>
+					</td>
+					<td>
+						<div>
+							<a href="" class="btn btn-primary" ng-click="addUser(tmpUser)"><i class="fa fa-check"></i> Save</a>
+							<a href="" class="btn btn-danger" ng-click="cancelEdit()"><i class="fa fa-close"> Never mind</i></a>
+						</div>
+					</td>
+				</tr>
+				<!-- end add a new user -->
+
+				<tr ng-repeat="user in users | filter:search">
+					<td>
+						<div ng-hide="user.editting">
+							<p><strong>{{user.name}}</strong> {{user.id}}</p>
+							<p>{{user.email}} {{user.tel}}</p>
+						</div>
+						<div ng-show="user.editting">
+							<p>
+								<input type="text" ng-model="tmpUser.name">
+								<input type="text" disabled="disabled" ng-model="tmpUser.id">
+							</p>
+							<p>
+								<input type="text" ng-model="tmpUser.email">
+								<input type="text" ng-model="tmpUser.tel">
+							</p>
+						</div>
+					</td>
+
+					<td>
+						<div ng-hide="user.editting">
+							<span class="feature" ng-class="{'bg-primary': feature.granted}" ng-repeat="feature in user.features">{{feature.name}}</span>
+						</div>
+
+						<div ng-show="user.editting">
+							<ul class="list-unstyled list-inline">
+								<li class="feature" 
+									ng-repeat="feature in tmpUser.features">
+									<input type="checkbox" name="" id="" ng-model=feature.granted>{{feature.name}}
+								</li>
+							</ul>
+						</div>
+					</td>
+
+					<td>
+						<div ng-hide="user.editting">
+							<p>{{user.group.name}}</p>
+						</div>
+
+						<div ng-show="user.editting">
+							<select ng-model="tmpUser.group" ng-options="group.description for group in groupList">
+							</select>
+						</div>
+					</td>
+
+					<td>
+						<div ng-hide="user.editting">
+							<a href="" class="btn btn-default" ng-click="toggleEdit(user)"><i class="fa fa-edit"></i> Edit</a>
+							<a href="" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+						</div>
+						<div ng-show="user.editting">
+							<a href="" class="btn btn-primary" ng-click="save(user)"><i class="fa fa-check"></i> Save</a>
+							<a href="" class="btn btn-danger" ng-click="cancelEdit()"><i class="fa fa-close"> Never mind</i></a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

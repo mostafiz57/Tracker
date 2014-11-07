@@ -1,0 +1,14 @@
+<aside class="admin">
+	<ul class="list-unstyled">
+		<li ng-repeat="page in pageList" ui-sref-active="active">
+			<a ui-sref="{{page.sref}}">
+				<i class="{{page.icon}}"></i>
+				{{page.title}}
+			</a>
+		</li>
+	</ul>
+</aside>
+
+<div id="content-wrapper" class="admin" ui-view>
+	
+</div>

@@ -1,0 +1,39 @@
+<nav class="navbar navbar-fixed-top navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">
+        <i class="fa fa-home"></i>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li ui-sref-active="active"><a ui-sref="map">Map</a></li>
+        <li ui-sref-active="active"><a ui-sref="history">History</a></li>
+        <li ui-sref-active="active"><a ui-sref="report">Report</a></li>
+        <li ui-sref-active="active"><a ui-sref="admin">Administrator</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">News</a></li>
+        <li><a href="#">Help</a></li>
+        <li class="user-card dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.user}}</a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">
+              <img src="{{user.profilePhoto}}" alt="">
+              {{username}}
+            </li>
+            <li role="presentation"><a href="#" role="menuitem">Blah</a></li>
+            <li role="presentation"><a href="#" role="menuitem">Profile</a></li>
+            <li role="presentation"><a href="/logout" role="menuitem">Log out</a></li>
+          </ul>
+        </li>
+        <li><a href="#"><i class="fa fa-book"></i> Logs</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<main id="main" ui-view>
+
+</main>
